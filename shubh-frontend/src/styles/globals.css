@@ -1,0 +1,248 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+/* ── CSS custom properties — dark mode (default) ─────────────────────────────── */
+:root {
+  --color-bg:           #0A0A0A;
+  --color-card:         #151515;
+  --color-card-hover:   #1A1A1A;
+  --color-border:       #222222;
+  --color-border-light: #2E2E2E;
+  --color-accent:       #8B0000;
+  --color-accent-light: #A50000;
+  --color-accent-dim:   #3D0000;
+  --color-text:         #FFFFFF;
+  --color-muted:        #B3B3B3;
+  --color-faint:        #666666;
+  --skeleton-base:      #1a1a1a;
+  --skeleton-shine:     #222222;
+}
+
+/* ── CSS custom properties — light mode ──────────────────────────────────────── */
+html.light {
+  --color-bg:           #F5F0E8;   /* warm parchment */
+  --color-card:         #FFFFFF;
+  --color-card-hover:   #F9F6F0;
+  --color-border:       #E0D8CC;
+  --color-border-light: #C8BEB0;
+  --color-accent:       #8B0000;   /* crimson stays — it's the brand */
+  --color-accent-light: #A50000;
+  --color-accent-dim:   #F5E6E6;
+  --color-text:         #1A1209;   /* dark ink */
+  --color-muted:        #5C4A32;   /* warm brown */
+  --color-faint:        #9E8A72;
+  --skeleton-base:      #EDE5D8;
+  --skeleton-shine:     #F5F0E8;
+}
+
+/* ── Wire CSS vars into Tailwind utilities ────────────────────────────────────── */
+/* These override the static hex values with dynamic vars so light mode works */
+.bg-bg           { background-color: var(--color-bg) !important; }
+.bg-card         { background-color: var(--color-card) !important; }
+.bg-card-hover   { background-color: var(--color-card-hover) !important; }
+.border-border   { border-color: var(--color-border) !important; }
+.text-text       { color: var(--color-text) !important; }
+.text-muted      { color: var(--color-muted) !important; }
+.text-faint      { color: var(--color-faint) !important; }
+.text-accent     { color: var(--color-accent) !important; }
+.bg-accent-dim   { background-color: var(--color-accent-dim) !important; }
+.border-accent   { border-color: var(--color-accent) !important; }
+
+@layer base {
+  *, *::before, *::after { box-sizing: border-box; }
+
+  html {
+    scroll-behavior: smooth;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+  }
+
+  body {
+    @apply bg-bg text-text font-body;
+    background-color: var(--color-bg);
+    color: var(--color-text);
+    overflow-x: hidden;
+    min-height: 100vh;
+    transition: background-color 0.3s ease, color 0.2s ease;
+  }
+
+  ::selection {
+    background-color: #8B0000;
+    color: #ffffff;
+  }
+
+  ::-webkit-scrollbar        { width: 3px; height: 3px; }
+  ::-webkit-scrollbar-track  { background: var(--color-bg); }
+  ::-webkit-scrollbar-thumb  { background: #8B0000; border-radius: 1px; }
+
+  :focus-visible {
+    outline: 1px solid #8B0000;
+    outline-offset: 2px;
+  }
+  :focus:not(:focus-visible) { outline: none; }
+}
+
+@layer components {
+  .container-main { @apply max-w-6xl mx-auto px-6 lg:px-8; }
+  .section-pad    { @apply py-24 lg:py-32; }
+  .rule           { border-top: 1px solid var(--color-border); }
+
+  .eyebrow {
+    @apply font-mono text-xs tracking-widest2 uppercase;
+    color: var(--color-accent);
+  }
+
+  .heading-display {
+    @apply font-display font-bold leading-tight;
+    color: var(--color-text);
+  }
+
+  .card-base {
+    background-color: var(--color-card);
+    border: 1px solid var(--color-border);
+    border-radius: 0;
+  }
+
+  .card-hover {
+    background-color: var(--color-card);
+    border: 1px solid var(--color-border);
+    border-radius: 0;
+    transition: border-color 0.2s;
+  }
+  .card-hover:hover {
+    border-color: var(--color-border-light);
+  }
+
+  .btn-primary {
+    @apply inline-flex items-center justify-center
+           text-white font-body font-medium
+           text-sm tracking-wider uppercase px-8 py-3
+           transition-all duration-200;
+    background-color: var(--color-accent);
+    border: 1px solid var(--color-accent);
+    border-radius: 0;
+  }
+  .btn-primary:hover {
+    background-color: var(--color-accent-light);
+    border-color: var(--color-accent-light);
+  }
+
+  .btn-ghost {
+    @apply inline-flex items-center justify-center
+           font-body font-medium text-sm tracking-wider uppercase
+           px-8 py-3 transition-all duration-200;
+    border: 1px solid var(--color-border);
+    color: var(--color-muted);
+    border-radius: 0;
+  }
+  .btn-ghost:hover {
+    border-color: var(--color-muted);
+    color: var(--color-text);
+  }
+
+  .btn-danger {
+    @apply inline-flex items-center justify-center
+           font-body font-medium text-sm tracking-wider uppercase
+           px-8 py-3 transition-all duration-200;
+    border: 1px solid #EF4444;
+    color: #EF4444;
+    border-radius: 0;
+  }
+  .btn-danger:hover { background-color: #EF4444; color: white; }
+
+  .tag {
+    @apply inline-block font-mono text-xs px-3 py-1;
+    color: var(--color-accent);
+    background-color: var(--color-accent-dim);
+    border: 1px solid rgba(139, 0, 0, 0.3);
+  }
+
+  .input-base {
+    @apply w-full px-4 py-3.5 text-sm font-body transition-colors duration-150;
+    background-color: var(--color-card);
+    border: 1px solid var(--color-border);
+    color: var(--color-text);
+    border-radius: 0;
+  }
+  .input-base::placeholder { color: var(--color-faint); }
+  .input-base:focus {
+    outline: none;
+    border-color: var(--color-muted);
+  }
+
+  .input-label {
+    @apply font-mono text-xs tracking-widest uppercase block mb-2;
+    color: var(--color-faint);
+  }
+
+  /* ── Skeleton shimmer ──────────────────────────────────────────────── */
+  .skeleton {
+    background: linear-gradient(
+      90deg,
+      var(--skeleton-base) 25%,
+      var(--skeleton-shine) 50%,
+      var(--skeleton-base) 75%
+    );
+    background-size: 200% 100%;
+    animation: shimmer 1.5s infinite;
+  }
+
+  /* ── Blog prose ────────────────────────────────────────────────────── */
+  .prose-dark { color: var(--color-muted); line-height: 1.75; }
+  .prose-dark h1 { @apply font-display font-bold text-4xl mt-12 mb-4 leading-tight; color: var(--color-text); }
+  .prose-dark h2 { @apply font-display font-bold text-3xl mt-10 mb-4 leading-tight; color: var(--color-text); }
+  .prose-dark h3 { @apply font-display font-semibold text-2xl mt-8 mb-3 leading-snug; color: var(--color-text); }
+  .prose-dark h4 { @apply font-display font-semibold text-xl mt-6 mb-2; color: var(--color-text); }
+  .prose-dark p  { @apply mb-6; }
+  .prose-dark a  { color: var(--color-accent); text-decoration: underline; }
+  .prose-dark a:hover { color: var(--color-accent-light); }
+  .prose-dark strong { color: var(--color-text); font-weight: 600; }
+  .prose-dark code {
+    @apply font-mono text-sm px-1.5 py-0.5;
+    color: var(--color-accent);
+    background-color: var(--color-card);
+  }
+  .prose-dark pre {
+    @apply p-6 overflow-x-auto mb-8 mt-6;
+    background-color: var(--color-card);
+    border: 1px solid var(--color-border);
+  }
+  .prose-dark pre code { background: transparent; color: var(--color-muted); padding: 0; }
+  .prose-dark blockquote {
+    @apply pl-6 my-8 italic;
+    border-left: 2px solid var(--color-accent);
+    color: var(--color-muted);
+    opacity: 0.85;
+  }
+  .prose-dark ul { @apply list-none mb-6 space-y-2; }
+  .prose-dark ul li { @apply flex gap-3 items-start; }
+  .prose-dark ul li::before { content: ''; @apply block w-1 h-1 shrink-0 mt-2; background: var(--color-accent); }
+  .prose-dark ol { @apply list-decimal list-inside mb-6 space-y-2; }
+  .prose-dark img { @apply w-full my-10; }
+  .prose-dark hr  { @apply my-14; border-color: var(--color-border); }
+  .prose-dark table { @apply w-full mb-8 border-collapse text-sm; }
+  .prose-dark th { @apply font-mono text-xs text-left px-4 py-2; color: var(--color-faint); border-bottom: 1px solid var(--color-border); }
+  .prose-dark td { @apply px-4 py-3; color: var(--color-muted); border-bottom: 1px solid var(--color-border); opacity: 0.5; }
+}
+
+@layer utilities {
+  .grain::after {
+    content: '';
+    position: fixed;
+    inset: 0;
+    pointer-events: none;
+    z-index: 9999;
+    opacity: 0.025;
+    background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noise'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noise)'/%3E%3C/svg%3E");
+  }
+  .cursor-none, .cursor-none * { cursor: none !important; }
+  .line-clamp-2 { display: -webkit-box; -webkit-line-clamp: 2; -webkit-box-orient: vertical; overflow: hidden; }
+  .line-clamp-3 { display: -webkit-box; -webkit-line-clamp: 3; -webkit-box-orient: vertical; overflow: hidden; }
+}
+
+/* ── Keyframes ──────────────────────────────────────────────────────────────── */
+@keyframes shimmer {
+  0%   { background-position: 200% 0; }
+  100% { background-position: -200% 0; }
+}
