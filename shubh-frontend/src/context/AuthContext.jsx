@@ -129,6 +129,20 @@ export function AuthProvider({ children }) {
     dispatch({ type: 'PROFILE_UPDATED', payload: fields });
   }, []);
 
+  // ── Permission helper ────────────────────────────────────────────────────────
+  /**
+   * hasPermission(perm)
+   * Returns true if the user is an admin (superadmin bypass)
+   * or has the specific permission flag set to true.
+   *
+   * Usage: hasPermission('managePosts')
+   */
+  const hasPermission = useCallback((perm) => {
+    if (!state.user) return false;
+    if (state.user.role === 'admin') return true;
+    return Boolean(state.user.permissions?.[perm]);
+  }, [state.user]);
+
   // Memoise the value so consumers only re-render when something actually changes
   const value = useMemo(() => ({
     user:          state.user,
@@ -136,10 +150,12 @@ export function AuthProvider({ children }) {
     error:         state.error,
     isAdmin:       state.user?.role === 'admin',
     isLoggedIn:    Boolean(state.user),
+    permissions:   state.user?.permissions || {},
     login,
     logout,
     updateProfile,
-  }), [state, login, logout, updateProfile]);
+    hasPermission,
+  }), [state, login, logout, updateProfile, hasPermission]);
 
   return (
     <AuthContext.Provider value={value}>

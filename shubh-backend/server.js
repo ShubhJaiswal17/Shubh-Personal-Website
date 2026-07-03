@@ -12,7 +12,7 @@ const dotenv = require('dotenv');
 
 dotenv.config();
 
-const connectDB = require('./config/db');
+const connectDB  = require('./config/db');
 const errorHandler = require('./middleware/errorHandler');
 const AppError = require('./utils/AppError');
 
