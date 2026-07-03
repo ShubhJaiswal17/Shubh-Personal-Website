@@ -55,4 +55,24 @@ const restrictTo = (...roles) => (req, _res, next) => {
   next();
 };
 
-module.exports = { protect, restrictTo };
+/**
+ * requirePermission — granular permission check.
+ * Admins always pass (superadmin bypass).
+ * Non-admin users are checked against their permissions map.
+ *
+ * Usage: router.post('/', protect, requirePermission('managePosts'), createPost)
+ * Multiple: router.get('/', protect, requirePermission('viewAnalytics', 'managePosts'), handler)
+ *   → user must have ALL listed permissions
+ */
+const requirePermission = (...perms) => (req, _res, next) => {
+  // Admins bypass all permission checks
+  if (req.user.role === 'admin') return next();
+
+  const missing = perms.filter((p) => !req.user.permissions?.[p]);
+  if (missing.length > 0) {
+    return next(new AppError('You do not have permission to perform this action.', 403));
+  }
+  next();
+};
+
+module.exports = { protect, restrictTo, requirePermission };

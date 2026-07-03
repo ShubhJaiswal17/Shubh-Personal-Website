@@ -36,4 +36,10 @@ mongoose.connection.on('reconnected', () => {
   console.log('✅ MongoDB reconnected.');
 });
 
+// Seed admin once the connection is established (works on initial connect + retries)
+mongoose.connection.once('open', () => {
+  const seedAdmin = require('./seedAdmin');
+  seedAdmin();
+});
+
 module.exports = connectDB;
