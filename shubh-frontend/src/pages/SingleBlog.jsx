@@ -20,30 +20,30 @@ import { useEffect, useRef, useState } from 'react';
 import { useParams, Link } from 'react-router-dom';
 import { motion, useScroll, useTransform, AnimatePresence } from 'framer-motion';
 
-import SEO from '../components/common/SEO';
-import PageWrapper from '../components/common/PageWrapper';
-import Spinner from '../components/common/Spinner';
-import PostCard from '../components/common/PostCard';
-import SkeletonPost from '../components/common/SkeletonPost';
+import SEO             from '../components/common/SEO';
+import PageWrapper     from '../components/common/PageWrapper';
+import Spinner         from '../components/common/Spinner';
+import PostCard        from '../components/common/PostCard';
+import SkeletonPost    from '../components/common/SkeletonPost';
 import TableOfContents from '../components/blog/TableOfContents';
-import SocialShare from '../components/blog/SocialShare';
-import FeaturedBadge from '../components/blog/FeaturedBadge';
-import CommentSection from '../components/blog/CommentSection';
+import SocialShare     from '../components/blog/SocialShare';
+import FeaturedBadge   from '../components/blog/FeaturedBadge';
+import CommentSection  from '../components/blog/CommentSection';
 
-import { useFetch } from '../hooks/useFetch';
+import { useFetch }           from '../hooks/useFetch';
 import { useTableOfContents } from '../hooks/useTableOfContents';
-import { blogService } from '../services/blogService';
+import { blogService }        from '../services/blogService';
 import { formatDate, formatViews } from '../utils/helpers';
-import { stagger, fadeUp } from '../utils/motion';
+import { stagger, fadeUp }    from '../utils/motion';
 
 // ── Reading Progress ───────────────────────────────────────────────────────────
 function ReadingProgress() {
   const barRef = useRef(null);
   useEffect(() => {
     const onScroll = () => {
-      const el = document.documentElement;
+      const el    = document.documentElement;
       const total = el.scrollHeight - el.clientHeight;
-      const pct = total > 0 ? (el.scrollTop / total) * 100 : 0;
+      const pct   = total > 0 ? (el.scrollTop / total) * 100 : 0;
       if (barRef.current) barRef.current.style.width = `${Math.min(pct, 100)}%`;
     };
     window.addEventListener('scroll', onScroll, { passive: true });
@@ -114,7 +114,7 @@ export default function SingleBlog() {
 
   // View count
   useEffect(() => {
-    if (post?._id) blogService.view(post._id).catch(() => { });
+    if (post?._id) blogService.view(post._id).catch(() => {});
   }, [post?._id]);
 
   // Related posts

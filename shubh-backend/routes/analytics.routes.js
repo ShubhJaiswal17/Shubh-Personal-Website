@@ -4,10 +4,10 @@ const express = require('express');
 const router  = express.Router();
 
 const analyticsController = require('../controllers/analytics.controller');
-const { protect, requirePermission } = require('../middleware/auth');
+const { protect, restrictTo } = require('../middleware/auth');
 
 // All analytics routes are admin-only
-router.use(protect, requirePermission('viewAnalytics'));
+router.use(protect, restrictTo('admin'));
 
 router.get('/overview',  analyticsController.getOverview);
 router.get('/posts',     analyticsController.getPostsAnalytics);

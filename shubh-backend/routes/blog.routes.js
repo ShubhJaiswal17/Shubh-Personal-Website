@@ -4,7 +4,7 @@ const express = require('express');
 const router  = express.Router();
 
 const blogController = require('../controllers/blog.controller');
-const { protect, requirePermission } = require('../middleware/auth');
+const { protect, restrictTo } = require('../middleware/auth');
 const validate = require('../middleware/validate');
 const { createPostSchema, updatePostSchema } = require('../validators/schemas');
 
@@ -20,7 +20,7 @@ router.get('/:id/related', blogController.getRelatedPosts);
 router.patch('/:id/view',  blogController.incrementView);
 
 // Admin only
-router.use(protect, requirePermission('managePosts'));
+router.use(protect, restrictTo('admin'));
 router.post('/',     validate(createPostSchema), blogController.createPost);
 router.put('/:id',   validate(updatePostSchema), blogController.updatePost);
 router.delete('/:id',                            blogController.deletePost);

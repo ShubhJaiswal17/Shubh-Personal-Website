@@ -4,7 +4,7 @@ const express = require('express');
 const router  = express.Router();
 
 const newsletterController = require('../controllers/newsletter.controller');
-const { protect, requirePermission } = require('../middleware/auth');
+const { protect, restrictTo } = require('../middleware/auth');
 const validate = require('../middleware/validate');
 const { subscribeSchema } = require('../validators/schemas');
 const { newsletterLimiter } = require('../middleware/rateLimiter');
@@ -15,7 +15,7 @@ router.get('/confirm/:token',                                                   
 router.delete('/unsubscribe/:token',                                             newsletterController.unsubscribe);
 
 // Admin only
-router.use(protect, requirePermission('manageNewsletter'));
+router.use(protect, restrictTo('admin'));
 router.get('/',       newsletterController.getAllSubscribers);
 router.get('/stats',  newsletterController.getStats);
 

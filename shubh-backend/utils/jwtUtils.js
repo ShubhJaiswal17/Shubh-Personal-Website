@@ -5,11 +5,11 @@ const config = require('../config/jwt');
 
 /**
  * Sign a short-lived access token (15 min).
- * Payload: id + role + permissions.
+ * Payload is minimal: id + role only.
  */
-const signAccessToken = (userId, role, permissions = {}) => {
+const signAccessToken = (userId, role) => {
   return jwt.sign(
-    { id: userId, role, permissions },
+    { id: userId, role },
     config.access.secret,
     { expiresIn: config.access.expiresIn }
   );

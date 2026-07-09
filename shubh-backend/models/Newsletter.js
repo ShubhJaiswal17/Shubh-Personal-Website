@@ -50,6 +50,7 @@ const newsletterSchema = new mongoose.Schema(
   { timestamps: true }
 );
 
+
 newsletterSchema.index({ isActive: 1, isVerified: 1 });
 
 // ── Pre-save: generate unsubscribe token on first save ─────────────────────────

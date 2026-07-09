@@ -49,7 +49,7 @@ exports.login = catchAsync(async (req, res, next) => {
     return next(new AppError('Your account has been deactivated. Please contact support.', 403));
   }
 
-  const accessToken  = signAccessToken(user._id, user.role, user.permissions);
+  const accessToken  = signAccessToken(user._id, user.role);
   const refreshToken = signRefreshToken(user._id);
 
   // Store hashed refresh token
@@ -62,11 +62,7 @@ exports.login = catchAsync(async (req, res, next) => {
     message: 'Logged in successfully.',
     data: {
       accessToken,
-      user: {
-        id: user._id, name: user.name, email: user.email,
-        role: user.role, avatar: user.avatar,
-        permissions: user.permissions,
-      },
+      user: { id: user._id, name: user.name, email: user.email, role: user.role, avatar: user.avatar },
     },
   });
 });
@@ -105,7 +101,7 @@ exports.refresh = catchAsync(async (req, res, next) => {
   await user.addRefreshToken(newRefreshToken);
   setRefreshCookie(res, newRefreshToken);
 
-  const accessToken = signAccessToken(user._id, user.role, user.permissions);
+  const accessToken = signAccessToken(user._id, user.role);
 
   sendSuccess(res, {
     message: 'Token refreshed.',
@@ -184,17 +180,11 @@ exports.createAdmin = catchAsync(async (req, res, next) => {
   const existing = await User.findOne({ email });
   if (existing) return next(new AppError('Email already in use.', 409));
 
-  const allPerms = {
-    managePosts: true, manageCategories: true, manageProjects: true,
-    manageComments: true, manageNewsletter: true, manageMessages: true,
-    viewAnalytics: true, manageUsers: true,
-  };
-
-  const admin = await User.create({ name, email, password, role: 'admin', permissions: allPerms });
+  const admin = await User.create({ name, email, password, role: 'admin' });
 
   sendSuccess(res, {
     statusCode: 201,
     message: 'Admin account created.',
-    data: { id: admin._id, email: admin.email, role: admin.role, permissions: admin.permissions },
+    data: { id: admin._id, email: admin.email, role: admin.role },
   });
 });

@@ -3,7 +3,7 @@
 const express = require('express');
 const router  = express.Router();
 const commentController = require('../controllers/comment.controller');
-const { protect, requirePermission } = require('../middleware/auth');
+const { protect, restrictTo } = require('../middleware/auth');
 const { commentLimiter }      = require('../middleware/rateLimiter');
 
 // ── Public routes ──────────────────────────────────────────────────────────────
@@ -18,7 +18,7 @@ router.put('/:id',          commentController.editComment);
 router.delete('/:id',       commentController.deleteComment);
 
 // ── Admin routes ───────────────────────────────────────────────────────────────
-router.use(protect, requirePermission('manageComments'));
+router.use(protect, restrictTo('admin'));
 router.get('/admin/all',            commentController.adminGetComments);
 router.get('/admin/stats',          commentController.adminGetStats);
 router.patch('/admin/:id/status',   commentController.adminUpdateStatus);

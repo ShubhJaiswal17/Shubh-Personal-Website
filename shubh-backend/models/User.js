@@ -1,8 +1,8 @@
 'use strict';
 
 const mongoose = require('mongoose');
-const bcrypt = require('bcryptjs');
-const crypto = require('crypto');
+const bcrypt   = require('bcryptjs');
+const crypto   = require('crypto');
 
 const userSchema = new mongoose.Schema(
   {
@@ -40,25 +40,14 @@ const userSchema = new mongoose.Schema(
       maxlength: [300, 'Bio cannot exceed 300 characters'],
       default: '',
     },
-    // ── Granular RBAC permissions (toggle with 1/0) ─────────────────────────────
-    permissions: {
-      managePosts:      { type: Boolean, default: false },
-      manageCategories: { type: Boolean, default: false },
-      manageProjects:   { type: Boolean, default: false },
-      manageComments:   { type: Boolean, default: false },
-      manageNewsletter: { type: Boolean, default: false },
-      manageMessages:   { type: Boolean, default: false },
-      viewAnalytics:    { type: Boolean, default: false },
-      manageUsers:      { type: Boolean, default: false },
-    },
     // Hashed refresh tokens — supports multiple devices
     refreshTokens: {
       type: [String],
       select: false,
     },
     // Password reset
-    passwordResetToken: { type: String, select: false },
-    passwordResetExpires: { type: Date, select: false },
+    passwordResetToken:   { type: String, select: false },
+    passwordResetExpires: { type: Date,   select: false },
     isActive: {
       type: Boolean,
       default: true,
@@ -70,6 +59,9 @@ const userSchema = new mongoose.Schema(
     toObject: { virtuals: true },
   }
 );
+
+// ── Indexes ────────────────────────────────────────────────────────────────────
+
 
 // ── Pre-save hook: hash password ───────────────────────────────────────────────
 userSchema.pre('save', async function (next) {

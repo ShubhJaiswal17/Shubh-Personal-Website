@@ -1,7 +1,7 @@
 'use strict';
 
 const mongoose = require('mongoose');
-const slugify = require('slugify');
+const slugify  = require('slugify');
 
 const postSchema = new mongoose.Schema(
   {
@@ -26,9 +26,9 @@ const postSchema = new mongoose.Schema(
       required: [true, 'Content is required'],
     },
     coverImage: {
-      url: { type: String, default: '' },
-      publicId: { type: String, default: '' }, // Cloudinary public ID
-      alt: { type: String, default: '' },
+      url:       { type: String, default: '' },
+      publicId:  { type: String, default: '' }, // Cloudinary public ID
+      alt:       { type: String, default: '' },
     },
     author: {
       type: mongoose.Schema.Types.ObjectId,
@@ -85,6 +85,7 @@ const postSchema = new mongoose.Schema(
 );
 
 // ── Indexes ────────────────────────────────────────────────────────────────────
+
 postSchema.index({ status: 1, publishedAt: -1 });
 postSchema.index({ tags: 1 });
 postSchema.index({ category: 1 });
