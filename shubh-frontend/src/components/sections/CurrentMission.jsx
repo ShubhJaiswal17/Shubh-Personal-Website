@@ -4,8 +4,8 @@ import { fadeUp, slideLeft, slideRight, stagger } from '../../utils/motion';
 
 const STATS = [
   { value: '3+',  label: 'Years Coding',    sub: 'since 2021' },
-  { value: '12+', label: 'Projects Built',  sub: 'shipped & learning' },
-  { value: '7',   label: 'Years of Guitar', sub: 'rock to blues' },
+  { value: '5+', label: 'Projects Built',  sub: 'shipped & learning' },
+  { value: '2',   label: 'Years of Guitar', sub: 'rock to blues' },
   { value: '∞',   label: 'Left to Learn',   sub: 'that\'s the point' },
 ];
 
@@ -95,23 +95,6 @@ export default function CurrentMission() {
             </div>
           </motion.div>
         </div>
-
-        {/* Running ticker — editorial detail */}
-        <motion.div
-          initial={{ opacity: 0 }}
-          animate={inView ? { opacity: 1 } : { opacity: 0 }}
-          transition={{ delay: 0.6, duration: 0.8 }}
-          className="border-t border-border pt-8 overflow-hidden"
-        >
-          <div className="flex gap-12 animate-none">
-            {['React.js', 'Node.js', 'Express', 'MongoDB', 'JWT', 'Tailwind', 'Framer Motion', 'REST APIs', 'Git', 'Vercel', 'Railway'].map((tech) => (
-              <span key={tech} className="font-mono text-xs text-border tracking-widest whitespace-nowrap shrink-0">
-                {tech}
-              </span>
-            ))}
-          </div>
-        </motion.div>
-
       </div>
     </section>
   );

@@ -5,84 +5,85 @@ import PageWrapper from '../components/common/PageWrapper';
 
 const TIMELINE = [
   {
-    year: '2004',
+    year: '2006',
     title: 'Born into curiosity',
     category: 'Life',
     desc: 'Entered the world. Started asking questions that would eventually be answered by Stack Overflow, twenty years later.',
     icon: '★',
   },
   {
-    year: '2016',
-    title: 'First guitar chord',
-    category: 'Music',
-    desc: 'A second-hand acoustic guitar. G major. The beginning of a lifelong obsession with strings, sound, and the discipline of practising things that hurt your fingers.',
-    icon: '🎸',
-  },
-  {
-    year: '2019',
+    year: '2021',
     title: 'First taste of tech',
     category: 'Code',
     desc: 'School computer classes. Basic programming. Nothing clicked yet — but something was being quietly installed.',
     icon: '💻',
   },
   {
-    year: '2021',
+    year: '2022',
     title: 'First line of real code',
     category: 'Code',
     desc: 'print("Hello World") — and immediately wanted to know how far this rabbit hole went. Turns out: very far.',
     icon: '⚡',
   },
   {
-    year: '2022',
-    title: 'B.Tech CSE begins',
-    category: 'Education',
-    desc: 'Enrolled in Computer Science Engineering. Quickly realised the syllabus and industry skills barely overlap. Started studying what actually matters in parallel.',
-    icon: '🎓',
-  },
-  {
-    year: '2022',
+    year: '2023',
     title: 'Discovered the web',
     category: 'Code',
     desc: 'HTML → CSS → "what is JavaScript?" The progression was inevitable. Building visual things in a browser felt like music in a different key.',
     icon: '🌐',
   },
   {
-    year: '2023',
-    title: 'Deep dive into React',
-    category: 'Code',
-    desc: 'Components, state, props, hooks. The mental model clicked. Building UIs stopped feeling like assembly and started feeling like composition.',
-    icon: '⚛',
-  },
-  {
-    year: '2023',
-    title: 'Started kickboxing',
-    category: 'Discipline',
-    desc: 'The discipline from the ring is directly transferable. Every session taught me something about showing up when you don\'t want to. That lesson applies everywhere.',
-    icon: '🥊',
-  },
-  {
-    year: '2023',
-    title: 'First full-stack project',
-    category: 'Code',
-    desc: 'A MERN task manager. The architecture was terrible. The auth was insecure. I learned more from its failures than from any tutorial.',
-    icon: '🛠',
-  },
-  {
     year: '2024',
+    title: 'B.Tech CSE begins',
+    category: 'Education',
+    desc: 'Enrolled in Computer Science Engineering. Quickly realised the syllabus and industry skills barely overlap. Started studying what actually matters in parallel.',
+    icon: '🎓',
+  },
+  {
+    year: '2025',
     title: 'Going deep on backend',
     category: 'Code',
     desc: 'JWT authentication, MongoDB aggregations, REST API design, rate limiting, error handling. Understanding systems — not just using them.',
     icon: '⚙',
   },
   {
-    year: '2024',
+    year: '2025',
+    title: 'Deep dive into React',
+    category: 'Code',
+    desc: 'Components, state, props, hooks. The mental model clicked. Building UIs stopped feeling like assembly and started feeling like composition.',
+    icon: '⚛',
+  },
+  {
+    year: '2025',
+    title: 'First full-stack project',
+    category: 'Code',
+    desc: 'A MERN task manager. The architecture was terrible. The auth was insecure. I learned more from its failures than from any tutorial.',
+    icon: '🛠',
+  },
+  {
+    year: '2026',
+    title: 'First guitar chord',
+    category: 'Music',
+    desc: 'A second-hand acoustic guitar. G major. The beginning of a lifelong obsession with strings, sound, and the discipline of practising things that hurt your fingers.',
+    icon: '🎸',
+  },
+  {
+    year: '2026',
+    title: 'Started kickboxing',
+    category: 'Discipline',
+    desc: 'The discipline from the ring is directly transferable. Every session taught me something about showing up when you don\'t want to. That lesson applies everywhere.',
+    icon: '🥊',
+  },
+  
+  {
+    year: '2026',
     title: 'Started writing publicly',
     category: 'Writing',
     desc: 'If you can\'t explain it, you don\'t understand it. The blog became a learning accountability system — and occasionally, someone found it useful.',
     icon: '✍',
   },
   {
-    year: '2025',
+    year: '2026',
     title: 'This portfolio',
     category: 'Code',
     desc: 'A complete production MERN product — backend API, frontend SPA, JWT auth, CMS, analytics. Ship what you learn.',
@@ -225,7 +226,7 @@ export default function Journey() {
           <p className="font-display text-2xl italic text-muted">
             The story isn't finished. This entry is still being written.
           </p>
-          <p className="font-mono text-xs text-faint mt-4 tracking-wider">— Updated 2025</p>
+          <p className="font-mono text-xs text-faint mt-4 tracking-wider">— Updated 2026</p>
         </div>
       </section>
 

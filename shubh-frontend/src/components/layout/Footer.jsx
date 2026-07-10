@@ -29,9 +29,9 @@ const SITE_LINKS = [
 ];
 
 const SOCIALS = [
-  { label: 'GitHub',   href: 'https://github.com/shubhjaiswal' },
-  { label: 'LinkedIn', href: 'https://linkedin.com/in/shubhjaiswal' },
-  { label: 'Twitter',  href: 'https://twitter.com/shubhjaiswal' },
+  { label: 'GitHub',   href: 'https://github.com/ShubhJaiswal17' },
+  { label: 'LinkedIn', href: 'https://www.linkedin.com/in/subha-kumar-jaiswal-157b0b285/' },
+  { label: 'Instagram',  href: 'https://www.instagram.com/shubhnovembre/' },
 ];
 
 export default function Footer() {

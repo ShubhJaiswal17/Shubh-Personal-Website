@@ -35,11 +35,11 @@ export default function Home() {
         canonicalPath="/"
       />
       <Hero />
-      <CurrentMission />
+      {/* <CurrentMission /> */}
       <FeaturedBlogs />
       <Skills />
       <ProjectsShowcase />
-      <JourneyDashboard />
+      {/* <JourneyDashboard /> */}
       <Philosophy />
       <Newsletter />
     </PageWrapper>

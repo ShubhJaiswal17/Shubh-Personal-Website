@@ -18,9 +18,9 @@ import { fadeUp, stagger } from '../utils/motion';
 import toast from 'react-hot-toast';
 
 const SOCIALS = [
-  { label: 'GitHub',   href: 'https://github.com/shubhjaiswal',      handle: '@shubhjaiswal'   },
-  { label: 'LinkedIn', href: 'https://linkedin.com/in/shubhjaiswal', handle: 'in/shubhjaiswal' },
-  { label: 'Twitter',  href: 'https://twitter.com/shubhjaiswal',     handle: '@shubhjaiswal'   },
+  { label: 'GitHub',   href: 'https://github.com/ShubhJaiswal17',      handle: '@ShubhJaiswal17'   },
+  { label: 'LinkedIn', href: 'https://www.linkedin.com/in/subha-kumar-jaiswal-157b0b285/', handle: 'in/subha-kumar-jaiswal' },
+  { label: 'Instagram',  href: 'https://www.instagram.com/shubhnovembre/',     handle: '@shubhnovembre'   },
 ];
 
 const OPEN_TO = [

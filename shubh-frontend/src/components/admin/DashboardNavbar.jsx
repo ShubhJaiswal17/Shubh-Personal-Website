@@ -1,15 +1,5 @@
-/**
- * DashboardNavbar.jsx
- *
- * Top bar inside admin pages:
- *  - Hamburger to open mobile sidebar
- *  - Current page title (passed as prop)
- *  - Quick actions (new post button)
- *  - User avatar with dropdown (profile / logout)
- */
-
 import { useState, useRef, useEffect } from 'react';
-import { Link, useNavigate } from 'react-router-dom';
+import { Link, useNavigate, useOutletContext } from 'react-router-dom';
 import { AnimatePresence, motion } from 'framer-motion';
 import { useAuth } from '../../context/AuthContext';
 import toast from 'react-hot-toast';
@@ -17,6 +7,7 @@ import toast from 'react-hot-toast';
 export default function DashboardNavbar({ title = 'Dashboard', onMenuClick }) {
   const { user, logout }  = useAuth();
   const navigate          = useNavigate();
+  const { openSidebar } = useOutletContext();
   const [ddOpen, setDd]   = useState(false);
   const ddRef             = useRef(null);
 
@@ -38,16 +29,16 @@ export default function DashboardNavbar({ title = 'Dashboard', onMenuClick }) {
 
   return (
     <header className="h-14 border-b border-border bg-bg flex items-center px-5 gap-4 shrink-0 sticky top-0 z-30">
-      {/* Hamburger — mobile only */}
-      <button
-        onClick={onMenuClick}
-        className="lg:hidden flex flex-col gap-1 p-1.5 text-muted hover:text-text transition-colors"
-        aria-label="Open menu"
-      >
-        <span className="block w-4 h-px bg-current" />
-        <span className="block w-4 h-px bg-current" />
-        <span className="block w-4 h-px bg-current" />
-      </button>
+      {/* Hamburger */}
+<button
+  onClick={openSidebar}
+  className="flex flex-col gap-1 p-1.5 text-muted hover:text-text transition-colors"
+  aria-label="Open menu"
+>
+  <span className="block w-4 h-px bg-current" />
+  <span className="block w-4 h-px bg-current" />
+  <span className="block w-4 h-px bg-current" />
+</button>
 
       {/* Page title */}
       <h1 className="font-display text-base font-semibold text-text flex-1 truncate">

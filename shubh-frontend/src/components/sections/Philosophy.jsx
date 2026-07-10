@@ -21,8 +21,8 @@ const PRINCIPLES = [
 ];
 
 const QUOTE = {
-  text: 'The best developers aren\'t the ones who know the most APIs. They\'re the ones who can think clearly, learn fast, and ship with intention.',
-  attr: 'Shubh Jaiswal',
+  text: 'In the depth of winter, I finally learned that within me there lay an invincible summer.',
+  attr: 'Albert Camus',
 };
 
 export default function Philosophy() {

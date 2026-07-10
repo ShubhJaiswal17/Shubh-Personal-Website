@@ -52,7 +52,9 @@ export default function Hero() {
     let w = (canvas.width  = window.innerWidth);
     let h = (canvas.height = window.innerHeight);
 
-    const particles = Array.from({ length: 80 }, () => ({
+    const particleCount = window.innerWidth < 768 ? 35 : 80;
+
+const particles = Array.from({ length: particleCount }, () => ({
       x: Math.random() * w,
       y: Math.random() * h,
       r: Math.random() * 1.2 + 0.2,
@@ -85,7 +87,10 @@ export default function Hero() {
   }, []);
 
   return (
-    <section ref={sectionRef} className="relative min-h-screen flex items-center overflow-hidden">
+    <section
+  ref={sectionRef}
+  className="relative min-h-[75svh] md:min-h-screen flex items-start md:items-center overflow-hidden"
+>
       {/* Canvas background */}
       <canvas ref={canvasRef} className="absolute inset-0 pointer-events-none" aria-hidden="true" />
 
@@ -97,7 +102,10 @@ export default function Hero() {
       />
 
       {/* Content — with parallax drift */}
-      <motion.div style={{ y }} className="container-main relative z-10 pt-28 pb-20">
+      <motion.div
+  style={{ y }}
+  className="container-main relative z-10 pt-24 pb-6 sm:pt-28 sm:pb-10 lg:pt-28 lg:pb-20"
+>
         <motion.div
           variants={stagger}
           initial="hidden"
@@ -105,7 +113,7 @@ export default function Hero() {
           className="max-w-5xl"
         >
           {/* Eyebrow */}
-          <motion.div variants={fadeUp} className="flex items-center gap-4 mb-8">
+          <motion.div variants={fadeUp} className="flex flex-wrap items-center gap-3 mb-5 lg:mb-8">
             <span className="eyebrow">Shubh Jaiswal — B.Tech CSE</span>
             <span className="w-12 h-px bg-accent" />
             <RoleTicker />
@@ -114,7 +122,7 @@ export default function Hero() {
           {/* Headline */}
           <motion.h1
             variants={fadeUp}
-            className="heading-display text-[clamp(3rem,8vw,7rem)] leading-[1.0] mb-8"
+            className="heading-display text-[clamp(2.7rem,10vw,7rem)] leading-[0.95] lg:leading-[1] mb-6 lg:mb-8"
           >
             Building at the{' '}
             <em className="text-accent not-italic">intersection</em>
@@ -125,44 +133,49 @@ export default function Hero() {
           </motion.h1>
 
           {/* Sub-copy */}
-          <motion.p variants={fadeUp} className="text-muted text-lg max-w-xl leading-relaxed mb-10">
+          <motion.p variants={fadeUp} className="text-muted text-base md:text-lg max-w-xl leading-relaxed mb-8 lg:mb-10">
             I build full-stack products that are technically sound and aesthetically
             intentional — then write about everything I learn along the way.
           </motion.p>
 
           {/* CTAs */}
-          <motion.div variants={fadeUp} className="flex flex-wrap gap-4 items-center">
-            <Link to="/projects" className="btn-primary">
-              View My Work
-            </Link>
-            <Link to="/blog" className="btn-ghost">
-              Read Writing
-            </Link>
-            <Link
-              to="/contact"
-              className="font-mono text-xs text-faint hover:text-text tracking-widest uppercase transition-colors ml-2"
-            >
-              Get in Touch →
-            </Link>
-          </motion.div>
+          <motion.div
+  variants={fadeUp}
+  className="flex flex-col sm:flex-row gap-3 sm:gap-4 w-full sm:w-auto"
+>
+  <Link
+    to="/projects"
+    className="btn-primary w-full sm:w-auto text-center"
+  >
+    View My Work
+  </Link>
+
+  <Link
+    to="/blog"
+    className="btn-ghost w-full sm:w-auto text-center"
+  >
+    Read Writing
+  </Link>
+</motion.div>
         </motion.div>
 
         {/* Scroll indicator */}
         <motion.div
-          initial={{ opacity: 0 }}
-          animate={{ opacity: 1 }}
-          transition={{ delay: 1.8, duration: 1 }}
-          className="absolute bottom-10 left-0 flex items-center gap-4"
-        >
-          <div className="w-px h-16 bg-gradient-to-b from-transparent via-border to-accent" />
-          <motion.span
-            animate={{ opacity: [0.3, 1, 0.3] }}
-            transition={{ repeat: Infinity, duration: 2.5 }}
-            className="font-mono text-[9px] text-faint tracking-[0.3em] uppercase rotate-0"
-          >
-            Scroll
-          </motion.span>
-        </motion.div>
+  initial={{ opacity: 0 }}
+  animate={{ opacity: 1 }}
+  transition={{ delay: 1.8, duration: 1 }}
+  className="hidden lg:flex absolute left-1/2 -translate-x-1/2 bottom-10 flex-col items-center gap-2 z-20"
+>
+  <motion.span
+    animate={{ opacity: [0.3, 1, 0.3] }}
+    transition={{ repeat: Infinity, duration: 2.5 }}
+    className="font-mono text-[9px] text-faint tracking-[0.3em] uppercase"
+  >
+    Scroll
+  </motion.span>
+
+  <div className="w-px h-16 bg-gradient-to-b from-transparent via-border to-accent" />
+</motion.div>
       </motion.div>
 
       {/* Bottom edge gradient */}

@@ -141,7 +141,7 @@ export default function Projects() {
             Looking for more? Everything I build is on GitHub.
           </p>
           <a
-            href="https://github.com/shubhjaiswal"
+            href="https://github.com/ShubhJaiswal17"
             target="_blank"
             rel="noopener noreferrer"
             className="btn-ghost"

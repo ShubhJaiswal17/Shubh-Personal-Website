@@ -115,6 +115,7 @@ export default function Blog() {
           <div className="flex flex-col lg:flex-row gap-12">
 
             {/* ── Sidebar ──────────────────────────────────────────────── */}
+            {posts.length > 0 && (
             <aside className="lg:w-52 shrink-0">
               {activeFilters && (
                 <button
@@ -178,7 +179,7 @@ export default function Blog() {
                 </div>
               )}
             </aside>
-
+)}
             {/* ── Posts grid ───────────────────────────────────────────── */}
             <div className="flex-1 min-w-0">
               <AnimatePresence mode="wait">
@@ -197,15 +198,19 @@ export default function Blog() {
                   </motion.div>
 
                 ) : posts.length === 0 ? (
-                  <motion.div key="empty" initial={{ opacity: 0 }} animate={{ opacity: 1 }}>
-                    <EmptyState
-                      icon="✍"
-                      message={isSearching ? `No results for "${debouncedSearch}"` : 'No posts yet.'}
-                      sub={activeFilters ? 'Try clearing the filters.' : undefined}
-                    />
-                  </motion.div>
-
-                ) : (
+  <motion.div
+    key="empty"
+    initial={{ opacity: 0 }}
+    animate={{ opacity: 1 }}
+    className="flex justify-center items-center min-h-[60vh] w-full"
+  >
+    <EmptyState
+      icon="✍"
+      message={isSearching ? `No results for "${debouncedSearch}"` : 'No posts yet.'}
+      sub={activeFilters ? 'Try clearing the filters.' : undefined}
+    />
+  </motion.div>
+) : (
                   <motion.div key="posts" initial={{ opacity: 0 }} animate={{ opacity: 1 }}>
                     {/*
                       FIX: Use gap-6 instead of gap-px + bg-border.
